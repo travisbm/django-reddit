@@ -8,3 +8,6 @@ class Post(models.Model):
     up_votes   = models.IntegerField(default=0)
     down_votes = models.IntegerField(default=0)
 
+    def __str__(self):
+      return self.post_text
+

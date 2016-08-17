@@ -1,11 +1,9 @@
 from django.shortcuts import render
 from django.views import generic
 
-class IndexView(generic.ListView):
-    template_name = 'posts/index.html'
+from .models import Post
 
-    def get_queryset(self):
-        return Post.objecst.all()
-
-# def index(request):
-#     return render(request, 'posts/index.html')
+def index(request):
+    posts_list = Post.objects.all()
+    context = {'posts_list': posts_list}
+    return render(request, 'posts/index.html', context)

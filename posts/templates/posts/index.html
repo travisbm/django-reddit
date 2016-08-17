@@ -1,1 +1,24 @@
-<h1>This is the index page.</h1>
+{% extends 'posts/base.html' %}
+
+{% block content %}
+
+  {% if posts_list %}
+      {% for post in posts_list %}
+        <div class="post col-md-10 col-md-offset-1">
+          <div class="votes">
+            <div class="arrow up" id="plus"></div>
+            <div class="score" id="count">0</div>
+            <div class="arrow down" id="minus"></div>
+          </div>
+          <a class="thumbnail self"></a>
+          <div class="link">
+            <p class="title">
+              <a href="/polls/{{ post.id }}/">{{ post.post_text }}</a>
+            </p>
+          </div>
+        </div>
+      {% endfor %}
+  {% else %}
+      <p>No posts are available.</p>
+  {% endif %}
+{% endblock %}
