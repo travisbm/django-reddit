@@ -1,0 +1,12 @@
+{% extends 'posts/base.html' %}
+{% block content %}
+
+  <div class="row col-md-10 col-md-offset-1">
+    <h2>{{ post.post_text }}</h2>
+    <ul>
+      <li>{{ post.pub_date }}</li>
+      <li>Votes: {{ post.votes }}</li>
+    </ul>
+  </div>
+
+{% endblock %}
