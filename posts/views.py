@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 
@@ -13,16 +13,19 @@ def index(request):
     return render(request, 'posts/index.html', context)
 
 def post_new(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.pub_date = timezone.now()
-            post.save()
-            return HttpResponseRedirect(reverse('posts:index'))
+    if request.method == 'POST':
+        if request.is_ajax():
+            form = PostForm(request.POST)
+            post_text = request.POST.get('post_text')
+            data = {"post_text": post_text}
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.pub_date = timezone.now()
+                post.save()
+            return JsonResponse(data)
     else:
         form = PostForm()
-    return render(request, 'posts/post_edit.html', {'form': form})
+    return render(request,'posts/post_edit.html', {'form': form})
 
 def vote(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
