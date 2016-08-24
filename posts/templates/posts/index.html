@@ -1,14 +1,31 @@
 {% extends 'posts/base.html' %}
 
 {% block content %}
+  <div class="new_post col-md-10 col-md-offset-1">
+    <a href="{% url 'posts:post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+  </div>
 
   {% if posts_list %}
       {% for post in posts_list %}
         <div class="post col-md-10 col-md-offset-1">
           <div class="votes">
-            <div class="arrow up" id="plus"></div>
-            <div class="score" id="count">0</div>
-            <div class="arrow down" id="minus"></div>
+            <div>
+
+              <form action="{% url 'posts:vote' post.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" name="up" value="up" />
+              </form>
+
+            </div>
+            <div class="score" id="count">{{ post.votes }}</div>
+            <div>
+
+              <form action="{% url 'posts:vote' post.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" name="down" value="down" />
+              </form>
+
+            </div>
           </div>
           <a class="thumbnail self"></a>
           <div class="link">
