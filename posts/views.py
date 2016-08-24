@@ -37,3 +37,8 @@ def vote(request, post_id):
     # with POST data. This prevents data from being posted twice if
     # the user hits the back button.
     return HttpResponseRedirect(reverse('posts:index'))
+
+def post(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    context = {'post': post}
+    return render(request, 'posts/post.html', context)
