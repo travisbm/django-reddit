@@ -28,17 +28,21 @@ def post_new(request):
     return render(request,'posts/post_edit.html', {'form': form})
 
 def vote(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
+    if request.method == 'POST':
+        if request.is_ajax():
+            up_down = request.POST.get('up_down')
+            post = get_object_or_404(Post, pk=post_id)
 
-    if 'up' in request.POST:
-        post.votes += 1
-        post.save()
-    else:
-        post.votes -= 1
-        post.save()
-    # Always return an HttpResponseRedirect after successfully dealing
-    # with POST data. This prevents data from being posted twice if
-    # the user hits the back button.
+            if up_down == "plus":
+                post.votes += 1
+                post.save()
+            else:
+                post.votes -= 1
+                post.save()
+
+            data = {"votes": post.votes}
+            return JsonResponse(data)
+
     return HttpResponseRedirect(reverse('posts:index'))
 
 def post(request, post_id):

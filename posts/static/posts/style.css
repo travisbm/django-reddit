@@ -13,7 +13,7 @@ div.post {
   margin-bottom: 8px;
 }
 
-div.votes {
+div.vote_wrapper {
     float: left;
     margin-right: 7px;
     margin-left: 7px;

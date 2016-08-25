@@ -1,36 +1,23 @@
 {% extends 'posts/base.html' %}
 
 {% block content %}
-  <div class="new_post col-md-10 col-md-offset-1">
-    <a href="{% url 'posts:post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-  </div>
+
+  <a href="{% url 'posts:post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
 
   {% if posts_list %}
       {% for post in posts_list %}
         <div class="post col-md-10 col-md-offset-1">
-          <div class="votes">
-            <div>
 
-              <form action="{% url 'posts:vote' post.id %}" method="post">
-                {% csrf_token %}
-                <input type="submit" name="up" value="up" id="up" />
-              </form>
-
-            </div>
-            <div class="score" id="count">{{ post.votes }}</div>
-            <div>
-
-              <form action="{% url 'posts:vote' post.id %}" method="post">
-                {% csrf_token %}
-                <input type="submit" name="down" value="down" id="down" />
-              </form>
-
-            </div>
+          <div class="vote_wrapper" id="{{ post.id }}">
+            <div class="arrow up" id="plus"></div>
+            <div class="score">{{ post.votes }}</div>
+            <div class="arrow down" id="minus"></div>
           </div>
+
           <a class="thumbnail self"></a>
           <div class="link">
             <p class="title">
-              <a href="{% url 'posts:post' post.id %}">{{ post.post_text }}</a>
+              <a href="/posts/{{ post.id }}/">{{ post.post_text }}</a>
             </p>
           </div>
         </div>
@@ -38,4 +25,5 @@
   {% else %}
       <p>No posts are available.</p>
   {% endif %}
+
 {% endblock %}

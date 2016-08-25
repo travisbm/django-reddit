@@ -17,28 +17,41 @@ $(document).ready(function() {
    return cookieValue;
   }
 
-  //For doing AJAX post
+  $('.vote_wrapper').delegate( '.arrow', 'click', function(event) {
+    event.preventDefault();
+    var wrapper = $(event.delegateTarget)
+    var csrftoken = getCookie('csrftoken');
+    var up_down = $(this).attr('id');
+    var post_id = parseInt($(wrapper).attr('id'), 10);
 
-  //When submit is clicked
-   $("#submit").click(function(e) {
+    $.ajax({
+      url: '/posts/' + post_id + '/vote/',
+      type: "POST",
+      data: { csrfmiddlewaretoken: csrftoken,
+      up_down: up_down,
+      post_id: post_id
+      },
+      success: function(data) {
+        console.log(data);
+        $(wrapper).children('.score').text(data['votes']);
+      },
+      error : function(xhr,errmsg,err) {
+      console.log(xhr.status + ": " + xhr.responseText);
+      }
+    });
+  });
 
-    //Prevent default submit. Must for Ajax post.Beginner's pit.
-     e.preventDefault();
+  $("#submit").click(function(e) {
+   e.preventDefault();
+   var csrftoken = getCookie('csrftoken');
+   var post_text = $('#id_post_text').val();
 
-    //Prepare csrf token
-     var csrftoken = getCookie('csrftoken');
-
-    //Collect data from fields
-     var post_text = $('#id_post_text').val();
-
-     $.ajax({
-           url : window.location.href, // the endpoint,commonly same url
-           type : "POST", // http method
-           data : { csrfmiddlewaretoken : csrftoken,
-           post_text : post_text
-     }, // data sent with the post request
-
-     // handle a successful response
+   $.ajax({
+     url : window.location.href,
+     type : "POST",
+     data : { csrfmiddlewaretoken : csrftoken,
+     post_text : post_text
+     }, 
      success : function(json) {
        console.log(json);
        window.location.href = "/posts";
@@ -46,7 +59,7 @@ $(document).ready(function() {
      error : function(xhr,errmsg,err) {
      console.log(xhr.status + ": " + xhr.responseText);
      }
-     });
+   });
   });
 
 });
