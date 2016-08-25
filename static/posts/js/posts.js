@@ -1,5 +1,14 @@
 $(document).ready(function() {
 
+  function reorder_posts(){
+    $(".post_items li").sort(sort_li)
+                       .appendTo('.post_items');
+  }
+
+  function sort_li(a, b){
+      return ($(b).data('position')) < ($(a).data('position')) ? 1 : -1;
+  }
+
   //For getting CSRF token
   function getCookie(name) {
             var cookieValue = null;
@@ -51,7 +60,7 @@ $(document).ready(function() {
      type : "POST",
      data : { csrfmiddlewaretoken : csrftoken,
      post_text : post_text
-     }, 
+     },
      success : function(json) {
        console.log(json);
        window.location.href = "/posts";

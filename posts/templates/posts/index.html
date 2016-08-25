@@ -2,28 +2,40 @@
 
 {% block content %}
 
-  <a href="{% url 'posts:post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+  <div class="row">
 
-  {% if posts_list %}
-      {% for post in posts_list %}
-        <div class="post col-md-10 col-md-offset-1">
+    <div class="col-sm-8">
+      {% if posts_list %}
+          <ul class="post_items">
+            {% for post in posts_list %}
+              <li data-position="{{ post.votes }}">
+                <div class="row">
+                  <div class="vote_wrapper" id="{{ post.id }}">
+                    <div class="arrow up" id="plus"></div>
+                    <div class="score">{{ post.votes }}</div>
+                    <div class="arrow down" id="minus"></div>
+                  </div>
+                  <a class="thumbnail self"></a>
+                  <div class="link">
+                    <p class="title">
+                      <a href="/posts/{{ post.id }}/">{{ post.post_text }}</a>
+                    </p>
+                  </div>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+      {% else %}
+          <p>No posts are available.</p>
+      {% endif %}
+    </div>
 
-          <div class="vote_wrapper" id="{{ post.id }}">
-            <div class="arrow up" id="plus"></div>
-            <div class="score">{{ post.votes }}</div>
-            <div class="arrow down" id="minus"></div>
-          </div>
+    <div class="col-sm-4" id="info_board">
+      <div class="new_post_button">
+        <a href="{% url 'posts:post_new' %}"   class="btn btn-primary">New Post</a>
+      </div>
+    </div>
 
-          <a class="thumbnail self"></a>
-          <div class="link">
-            <p class="title">
-              <a href="/posts/{{ post.id }}/">{{ post.post_text }}</a>
-            </p>
-          </div>
-        </div>
-      {% endfor %}
-  {% else %}
-      <p>No posts are available.</p>
-  {% endif %}
+  </div>
 
 {% endblock %}
