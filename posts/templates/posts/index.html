@@ -2,8 +2,6 @@
 
 {% block content %}
 
-  <a href="{% url 'posts:post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-
   {% if posts_list %}
       {% for post in posts_list %}
         <div class="post col-md-10 col-md-offset-1">
