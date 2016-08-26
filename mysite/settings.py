@@ -19,6 +19,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'posts/static')
+
+STATICFILES_FINDERS = (
+    'compressor.finders.CompressorFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'oo-if&*b(#3$hmjfhi2w0&xpj74z!wo&1y5l&-v5(^be79^2+r'
 
@@ -31,6 +43,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'compressor',
     'posts.apps.PostsConfig',
     'django.contrib.admin',
     'django.contrib.auth',

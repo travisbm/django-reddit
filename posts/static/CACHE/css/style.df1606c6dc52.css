@@ -1,0 +1,75 @@
+/* line 1, /Users/Britton/django_projects/mysite/posts/static/posts/css/style.scss */
+p {
+  padding: 10px;
+  font-size: 25px; }
+
+/* line 6, /Users/Britton/django_projects/mysite/posts/static/posts/css/style.scss */
+a {
+  text-decoration: none; }
+
+/* line 10, /Users/Britton/django_projects/mysite/posts/static/posts/css/style.scss */
+div.post {
+  display: block;
+  clear: both;
+  margin-bottom: 8px; }
+
+/* line 16, /Users/Britton/django_projects/mysite/posts/static/posts/css/style.scss */
+ul {
+  list-style: none; }
+
+/* line 20, /Users/Britton/django_projects/mysite/posts/static/posts/css/style.scss */
+div.vote_wrapper {
+  float: left;
+  margin-right: 7px;
+  margin-left: 7px;
+  background: transparent;
+  overflow: hidden; }
+
+/* line 28, /Users/Britton/django_projects/mysite/posts/static/posts/css/style.scss */
+div.score {
+  text-align: center; }
+
+/* line 32, /Users/Britton/django_projects/mysite/posts/static/posts/css/style.scss */
+div.link {
+  float: left; }
+
+/* line 37, /Users/Britton/django_projects/mysite/posts/static/posts/css/style.scss */
+.arrow.down {
+  background-image: url('https://www.redditstatic.com/sprite-reddit.SyuyEBMzq7M.png');
+  background-position: -21px -865px;
+  background-repeat: no-repeat; }
+
+/* line 43, /Users/Britton/django_projects/mysite/posts/static/posts/css/style.scss */
+.thumbnail {
+  float: left;
+  font-size: 0;
+  margin: 0;
+  margin-right: 5px;
+  margin-bottom: 2px;
+  overflow: hidden;
+  width: 70px; }
+
+/* line 53, /Users/Britton/django_projects/mysite/posts/static/posts/css/style.scss */
+.thumbnail.self {
+  height: 50px;
+  background-image: url('https://www.redditstatic.com/sprite-reddit.SyuyEBMzq7M.png');
+  background-position: 0px -491px;
+  background-repeat: no-repeat; }
+
+/* line 60, /Users/Britton/django_projects/mysite/posts/static/posts/css/style.scss */
+.arrow {
+  margin: 2px 0px 0px 0px;
+  width: 100%;
+  height: 14px;
+  display: block;
+  cursor: pointer;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  outline: none; }
+
+/* line 74, /Users/Britton/django_projects/mysite/posts/static/posts/css/style.scss */
+#info_board {
+  text-align: center; }

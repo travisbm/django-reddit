@@ -13,6 +13,10 @@ div.post {
   margin-bottom: 8px;
 }
 
+ul {
+  list-style: none;
+}
+
 div.vote_wrapper {
     float: left;
     margin-right: 7px;
@@ -70,4 +74,8 @@ div.link {
     margin-left: auto;
     margin-right: auto;
     outline: none;
+}
+
+#info_board {
+  text-align: center;
 }
