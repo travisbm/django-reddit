@@ -6,23 +6,23 @@ $(document).ready(function() {
   }
 
   function sort_li(a, b){
-      return ($(b).data('position')) < ($(a).data('position')) ? 1 : -1;
+    return ( $(b).find(".score").text() - $(a).find(".score").text() );
   }
 
   //For getting CSRF token
   function getCookie(name) {
-            var cookieValue = null;
-            if (document.cookie && document.cookie != '') {
-                  var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                 var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-               }
-            }
-        }
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+          var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+         var cookie = jQuery.trim(cookies[i]);
+    // Does this cookie string begin with the name we want?
+    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
    return cookieValue;
   }
 
@@ -43,6 +43,7 @@ $(document).ready(function() {
       success: function(data) {
         console.log(data);
         $(wrapper).children('.score').text(data['votes']);
+        reorder_posts();
       },
       error : function(xhr,errmsg,err) {
       console.log(xhr.status + ": " + xhr.responseText);
